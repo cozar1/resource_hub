@@ -30,7 +30,6 @@
     </div>
 
     <div class="body">
-        {%for b in range(50)%}
         {% for asset in assets %}
         <div class="asset" data-tags="{{ asset[2] | map(attribute=0) | join(',') }}">
             <img class="image" src="/static/images/{{asset[0]}}/d.png">
@@ -46,7 +45,6 @@
                 <span class="tag"><i class="{{i[1]}}"></i> {{ i[0] }}</span>
                 {% endfor %}
             </div> 
-            {% endfor %}
         </div>
         {% endfor %}
     </div>
