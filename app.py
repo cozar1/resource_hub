@@ -3,10 +3,6 @@ import sqlite3
 
 app = Flask(__name__)
 
-def Addthingy():
-    with sqlite3.connect("database.db") as conn:
-        conn.cursor().execute("INSERT INTO asset (title, description, normal, diffuse) VALUES (?, ?, ?, ?)", ("cohen", "This is a cohen", "cohen.png", "cohendiffuse.png"))
-
 @app.route('/')
 def home():
     conn = sqlite3.connect("database.db")
@@ -32,19 +28,33 @@ def home():
 
     print(assets)
     conn.close()
-    return render_template('home.html', tags=tags, assets=assets)
+    return render_template('home.html', tags=tags, assets=assets,show_navbar=True)
 
 
-@app.route('/add', methods=["GET", "POST"])
-def add():
-    name = request.form.get('name')
-    return render_template('home.html', title=name)
+@app.route('/upload')
+def upload():
+    return render_template('upload.html',show_navbar=False)
 
+@app.route('/asset/<int:id>')
+def asset(id):
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
+    cur.execute("SELECT id,title,description FROM asset WHERE ID = ?", (id,))
+    asset = cur.fetchall()
 
-@app.route("/test")
-def test():
-    Addthingy()
-    return app.redirect("/")
+    cur = conn.cursor()
+    cur.execute("SELECT CreatorID FROM Credit WHERE AssetID = ?", (id,))
+    creator_id = cur.fetchall()
+    cur = conn.cursor()
+    cur.execute("SELECT name FROM Creator WHERE ID = ?", (int(creator_id[0][0]),))
+    creator = cur.fetchall()
 
+    cur = conn.cursor()
+    cur.execute("SELECT name,icon FROM Tag WHERE ID IN (SELECT Tag_ID FROM assetTags WHERE Model_ID = ?)", (id,))
+    assettags = cur.fetchall()
+
+    print(assettags)
+
+    return render_template('asset.html',show_navbar=False,asset=asset,creator=creator,assettags=assettags)
 
 app.run(debug=True)

@@ -192,17 +192,42 @@ input {
 .image {
     width: 100%;
     height: auto; /* So the image doesn’t stretch */
-    border-radius: 2px 2px 0 0; /* Round only the top corners */
+    border-radius: 10px 10px 0 0; /* Round only the top corners */
 }
 
 .asset-tags {
-    margin: 10px;
+    font-size: 30px;
+    color: #C0A694;
+    
+    text-align: center;
     display: grid;
-    grid-template-rows: 50px;
-    grid-auto-rows: 50px;
+    
 }
 
-.asset-tags.tag {
-    font-size : 0.5px;
+.tag {
+    background-color: #612C2B;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
 }
 
+.asset-body {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 2fr;
+}
+
+.asset-info {
+    margin: 0px 20px 0px 20px;
+    text-align: center;
+}
+
+.asset-description {
+    margin: 0px 20px 0px 20px;
+    text-align: center;
+}
+
+.asset-downloads {
+    margin: 0px 20px 0px 20px;
+    text-align: center;
+}

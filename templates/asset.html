@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+{% block content %}
+<div class="asset-body">
+    <div class="asset-info">
+        <h1>{{asset[0][1]}}</h1>
+        <img class="image" src="/static/images/{{asset[0][0]}}/d.png">
+        <h1>{{creator[0][0]}}</h1>
+     
+        <div class="asset-tags">
+            {% for tag in assettags %}
+            <span class="tag"><i class="{{tag[1]}}"></i> {{ tag[0] }}</span>
+            {% endfor %}
+        </div> 
+
+    </div>
+    <div class="asset-description">
+        <h1>Description</h1>
+        <h1>{{asset[0][2]}}</h1>
+    </div>
+    <div class="asset-downloads">
+        <h1>Downloads</h1>
+        <a class="download_button"> D</a>
+        <a class="download_button"></a>
+    </div>
+</div>
+{% endblock %}
