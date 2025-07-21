@@ -245,7 +245,7 @@ input {
     transition-duration: 0.1s;
     font-size: 50px;
     text-align: center;
-    width: 100%;
+    width: 75%;
     padding: 10px;
     margin: 10px;
 }
@@ -253,4 +253,45 @@ input {
 
 .download_button:hover {
     scale: 120%;
+}
+
+.input {
+    text-align: left;
+    color: #C0A694;
+    background-color: #30343F;
+    padding: 20px 5px 20px 5px;
+    margin-bottom: 50px;
+}
+
+.input:focus {
+    outline: none; /* removes the default outline */
+
+}
+
+.text-input-fields {
+
+    margin-left: 50px;
+}
+.upload-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    vertical-align: middle;
+}
+
+.image-input-fields {
+    margin: 0px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center; 
+}
+
+.upload-preview{
+    text-align: center;
+}
+
+.image-preview {
+    width: 50%;
+    border-radius: 10px;
 }

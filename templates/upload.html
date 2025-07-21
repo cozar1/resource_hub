@@ -1,11 +1,29 @@
 {% extends "template.html" %}
 {% block content %}
-<div class="body">
-    <div class="upload-grid">
-        <div class="text-input-fields"></div>
-        <div class="upload-preview"></div>
-        <div class="image-input-fields"></div>
+<div class="upload-grid">
+    <div class="text-input-fields">
+        <div class="input-name">
+            <h1>Name</h1>
+            <input class="input" type="tel" name="name">
+        </div>
+        <div class="input-name">
+            <h1>Description</h1>
+            <input class="input" type="tel" name="name">
+        </div>
+        <div class="input-name">
+            <h1>Tag(s)</h1>
+            <input class="input" type="tel" name="name">
+        </div>
     </div>
-
+    <div class="upload-preview">
+        <h1>Preview</h1>
+        <img class="image-preview" src="../static/images/1/d.png">
+    </div>
+    <div class="image-input-fields">
+        <a class="download_button" href="../static/images/1/n" download="n.png">Normal Map <i class="fa-solid fa-download"></i></a>
+        <a class="download_button" href="../static/images/1/n" download="d.png">Diffuse Map <i class="fa-solid fa-download"></i></a>
+        <a class="download_button" href="../static/images/1/n" download="s.png">Specular Map <i class="fa-solid fa-download"></i></a>
+        <a class="download_button" href="../static/images/1/n" download="o.png">Occlusion Map <i class="fa-solid fa-download"></i></a>
+    </div>
 </div>
 {% endblock %}
