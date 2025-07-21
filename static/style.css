@@ -228,6 +228,29 @@ input {
 }
 
 .asset-downloads {
-    margin: 0px 20px 0px 20px;
+    margin: 0px 20px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center; 
+}
+
+.download_button {
+    font-size: 30px;
+    color: #C0A694;
+    border-radius: 10px;
+    background-color: #612C2B;
+    overflow: hidden;
+    transition-duration: 0.1s;
+    font-size: 50px;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+.download_button:hover {
+    scale: 120%;
 }

@@ -45,6 +45,7 @@ def asset(id):
     cur = conn.cursor()
     cur.execute("SELECT CreatorID FROM Credit WHERE AssetID = ?", (id,))
     creator_id = cur.fetchall()
+    
     cur = conn.cursor()
     cur.execute("SELECT name FROM Creator WHERE ID = ?", (int(creator_id[0][0]),))
     creator = cur.fetchall()
