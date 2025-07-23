@@ -100,7 +100,7 @@
 
             if (typeMap[label]) {
                 img.dataset.originalSrc = img.src; // Save the original image path
-                img.src = `/static/images/${assetIndex}/${label.toLowerCase()}.png`; // Update path
+                img.src = `/static/images/${assetIndex}${label.toLowerCase()}.png`; // Update path
             }
         });
 
