@@ -1,19 +1,19 @@
 {% extends "template.html" %}
 {% block content %}
-<form action="/upload" method="post">
+<form action="/upload" method="post" enctype="multipart/form-data">
     <div class="upload-grid">
         <div class="text-input-fields">
             <div class="input-name">
                 <h1>Name</h1>
-                <input class="input" type="tel" name="name" for="name">
+                <input class="input" type="text" name="name">
             </div>
             <div class="input-name">
                 <h1>Description</h1>
-                <input class="input" type="tel" name="description" for="description">
+                <input class="input" type="text" name="description">
             </div>
             <div class="input-name">
                 <h1>Tag(s)</h1>
-                <input class="input" type="tel" name="name">
+                <input class="input" type="text" name="tags">
             </div>
         </div>
         <div class="upload-preview">
@@ -22,15 +22,34 @@
             <button type="submit" class="upload-button">Upload!</button>
         </div>
         <div class="image-input-fields">
-            <label>Normal Map</label>
-            <input type="file" name="normal",for="diffuse">
-            <label>Diffuse Map</label>
-            <input type="file" name="diffuse">
-            <label>Specular Map</label>
-            <input type="file" name="specular">
-            <label>Occlusion Map</label>
-            <input type="file" name="occlusion">
+            <h1>Diffuse Map</h1>
+            <label class="custom-file-upload">
+                <input type="file" name="diffuse" accept=".png, .jpg" onchange="updateFileName(this, 'diffuse-file-name')">
+                <span id="diffuse-file-name">No file chosen</span>
+            </label>
+            <h1>Normal Map</h1>
+            <label class="custom-file-upload">
+                <input type="file" name="normal" accept=".png, .jpg" onchange="updateFileName(this, 'normal-file-name')">
+                <span id="normal-file-name">No file chosen</span>
+            </label>
+            <h1>Specular Map</h1>
+            <label class="custom-file-upload">
+                <input type="file" name="specular" accept=".png, .jpg" onchange="updateFileName(this, 'specular-file-name')">
+                <span id="specular-file-name">No file chosen</span>
+            </label>
+            <h1>Occlusion Map</h1>
+            <label class="custom-file-upload">
+                <input type="file" name="occlusion" accept=".png, .jpg" onchange="updateFileName(this, 'occlusion-file-name')">
+                <span id="occlusion-file-name">No file chosen</span>
+            </label>
         </div>
     </div>
 </form>
+
+<script>
+    function updateFileName(input, spanId) {
+        const fileName = input.files.length > 0 ? input.files[0].name : 'No file chosen';
+        document.getElementById(spanId).textContent = fileName;
+    }
+</script>
 {% endblock %}

@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect, url_for
 import sqlite3
 import os
 from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__)
 
@@ -35,32 +36,45 @@ def home():
 
 @app.route('/upload', methods=["GET", "POST"])
 def upload():
-    error = None    
-    if request.method == "POST":
-        name = request.form["name"]
-        description = request.form["description"]
+    if request.method == "GET":
+        return render_template('upload.html', show_navbar=False)
 
-        # Grab uploaded files
-        diffuse_file = request.files.get("diffuse")
+    name = request.form["name"]
+    description = request.form["description"]
 
-        conn = sqlite3.connect("database.db")
-        cursor = conn.cursor()
+    # Grab uploaded files
+    diffuse_file = request.files.get("diffuse")
+    normal_file = request.files.get("normal")
+    specular_file = request.files.get("specular")
+    occlusion_file = request.files.get("occlusion")
 
-        # Insert the asset
-        cursor.execute("INSERT INTO asset(name, description) VALUES(?, ?)", (name, description))
-        conn.commit()
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
 
-        # Get the asset ID
-        asset_id = cursor.lastrowid
+    # Insert the asset
+    cursor.execute("INSERT INTO asset(name, description) VALUES(?, ?)", (name, description))
+    conn.commit()
 
-        conn.close()
+    # Get the asset ID
+    asset_id = cursor.lastrowid
 
-        # Save image if it exists
-        if diffuse_file and diffuse_file.filename:
-            filename = secure_filename(f"{asset_id}d.png")
-            diffuse_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+    conn.close()
 
-    return render_template('upload.html', show_navbar=False)
+    # Save images with asset ID and type suffix
+    if diffuse_file and diffuse_file.filename:
+        filename = secure_filename(f"{asset_id}d.png")
+        diffuse_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+    if normal_file and normal_file.filename:
+        filename = secure_filename(f"{asset_id}n.png")
+        normal_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+    if specular_file and specular_file.filename:
+        filename = secure_filename(f"{asset_id}s.png")
+        specular_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+    if occlusion_file and occlusion_file.filename:
+        filename = secure_filename(f"{asset_id}o.png")
+        occlusion_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+
+    return redirect(url_for("home"))
 
 @app.route('/asset/<int:id>')
 def asset(id):
